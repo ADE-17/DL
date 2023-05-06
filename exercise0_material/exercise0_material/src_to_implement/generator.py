@@ -23,8 +23,6 @@ class ImageGenerator:
         self.mirroring = mirroring
         self.shuffle = shuffle
         
-            
-        
         self.image_filenames = []
         for filename in os.listdir(file_path):
             self.image_filenames.append(os.path.join(file_path, filename))
@@ -38,7 +36,12 @@ class ImageGenerator:
         
         self.class_dict = {0: 'airplane', 1: 'automobile', 2: 'bird', 3: 'cat', 4: 'deer', 5: 'dog', 6: 'frog',
                            7: 'horse', 8: 'ship', 9: 'truck'}
-        #TODO: implement constructor
+        
+        # self.class_indices = {}
+        # for i, class_name in self.class_dict.items():
+        #     self.class_indices[class_name] = i
+        
+        self.index = 0
 
     def next(self):
         # This function creates a batch of images and corresponding labels and returns them.
@@ -46,10 +49,29 @@ class ImageGenerator:
         # Note that your amount of total data might not be divisible without remainder with the batch_size.
         # Think about how to handle such cases
         #TODO: implement next method
+        
+        indices = range(self.index, min(self.index + self.batch_size, len(self.image_filenames)))
+        
         images = []
         labels = []
-        pass
-        #return images, labels
+        
+        for i in indices:
+            image = np.load(self.image_filenames[i])
+            image = np.resize(image, self.image_size)
+            images.append(image)
+            
+            filename = os.path.basename(self.image_filenames[i])
+            label_name = self.labels[filename.replace('.npy','')]
+            label = self.class_dict[label_name]
+            labels.append(label)
+            
+            self.index += self.batch_size
+            if self.index >= len(self.image_filenames):
+                self.index = 0
+                if self.shuffle:
+                    np.random.shuffle(self.image_filenames)
+        # pass
+        return images, labels
 
     def augment(self,img):
         # this function takes a single image as an input and performs a random transformation
