@@ -40,3 +40,24 @@ class Circle:
     def show(self):
         plt.imshow(self.output, cmap='gray') #show
         plt.show()
+        
+class Spectrum:
+    def __init__(self, resolution):
+        #Initalise
+        self.resolution = resolution
+        self.output = np.zeros((self.resolution, self.resolution, 3)) #3D array RGB
+        
+    def draw(self):
+        
+        red_channel = np.linspace(0, 1, self.resolution) #Red channel
+        green_channel = np.linspace(0, 1, self.resolution)[:, np.newaxis] #green channel #reshaped to have a column vector
+        
+        self.output[:, :, 0] = red_channel
+        self.output[:, :, 1] = green_channel
+        self.output[:, :, 2] = 1 - red_channel #Blue channel
+        return self.output.copy()
+        
+    def show(self):
+        plt.imshow(self.output) #show
+        plt.axis('off')
+        plt.show()
