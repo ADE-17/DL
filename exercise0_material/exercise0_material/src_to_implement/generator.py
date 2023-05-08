@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 # This next function returns the next generated object. In our case it returns the input of a neural network each time it gets called.
 # This input consists of a batch of images and its corresponding labels.
 class ImageGenerator:
+    def _get_corner_points(self, image):
+        # Utility function to check whether the augmentations where performed
+        # expects batch of image - expected shape is [s,x,y,c]
+        return image[:, [0, -1], :, :][:, :, [0, -1], :]
     def __init__(self, file_path, label_path, batch_size, image_size, rotation=False, mirroring=False, shuffle=False):
         # Define all members of your generator class object as global members here.
         # These need to include:
@@ -40,9 +44,11 @@ class ImageGenerator:
         # self.class_indices = {}
         # for i, class_name in self.class_dict.items():
         #     self.class_indices[class_name] = i
-        
+        self.num_samples = len(self.image_filenames)
+        self.num_batches_per_epoch = int(np.ceil(self.num_samples / float(self.batch_size)))
         self.index = 0
-
+        self.num_batches_completed = 0
+        
     def next(self):
         # This function creates a batch of images and corresponding labels and returns them.
         # In this context a "batch" of images just means a bunch, say 10 images that are forwarded at once.
@@ -50,7 +56,9 @@ class ImageGenerator:
         # Think about how to handle such cases
         #TODO: implement next method
         
-        indices = range(self.index, min(self.index + self.batch_size, len(self.image_filenames)))
+        start_index = self.index
+        end_index = min(self.index + self.batch_size, len(self.image_filenames))
+        indices = range(start_index, end_index)
         
         images = []
         labels = []
@@ -65,24 +73,54 @@ class ImageGenerator:
             label = self.class_dict[label_name]
             labels.append(label)
             
-            self.index += self.batch_size
-            if self.index >= len(self.image_filenames):
-                self.index = 0
-                if self.shuffle:
-                    np.random.shuffle(self.image_filenames)
+        self.num_batches_completed += 1
+        self.index += self.batch_size
+        if self.index >= len(self.image_filenames):
+            self.index = 0
+            if self.shuffle:
+                np.random.shuffle(self.image_filenames)
+                
+        if end_index == len(self.image_filenames):             
+            images_remaining = self.batch_size - len(images)
+            end_index = images_remaining
+            indices = range(0, end_index)
+            for i in indices:
+                image = np.load(self.image_filenames[i])
+                image = np.resize(image, self.image_size)
+                images.append(image)
+                
+                filename = os.path.basename(self.image_filenames[i])
+                label_name = self.labels[filename.replace('.npy','')]
+                label = self.class_dict[label_name]
+                labels.append(label)
+            
+            # Update the index for the next batch
+            self.num_batches_completed += 1
+            self.index = images_remaining
+            if self.shuffle:
+                np.random.shuffle(self.image_filenames)
         # pass
+        images = np.array(images)
+        labels = np.array(labels)
+    
         return images, labels
-
-    def augment(self,img):
-        # this function takes a single image as an input and performs a random transformation
-        # (mirroring and/or rotation) on it and outputs the transformed image
-        #TODO: implement augmentation function
-
-        return img
-
+    
     def current_epoch(self):
         # return the current epoch number
-        return 0
+        return self.num_batches_completed // self.num_batches_per_epoch
+    
+    def augment(self, img):
+        # Perform a random rotation of 0, 90, 180 or 270 degrees
+        if self.rotation:
+            rotation_angle = np.random.choice([0, 90, 180, 270])
+            img = np.rot90(img, k=rotation_angle // 90, axes=(0, 1))
+            
+        if self.mirroring:
+        # randomly mirror image horizontally
+            if np.random.choice([True, False]):
+                img = np.fliplr(img)
+                
+        return img
 
     def class_name(self, x):
         # This function returns the class name for a specific input
