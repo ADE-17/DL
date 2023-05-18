@@ -33,8 +33,8 @@ class Circle:
     def draw(self):
         x, y = self.coordinates #get circle coordinates
         x_max, y_max = np.meshgrid(np.arange(self.resolution), np.arange(self.resolution)) #Draw canvas
-        shift = np.sqrt((x_max - x) ** 2 + (y_max - y) ** 2) #euclidian distance
-        self.output[shift <= self.radius] = 1 #mask every other point on canvas not inside radius
+        distance = np.sqrt((x_max - x) ** 2 + (y_max - y) ** 2) #euclidian distance of each point from centre
+        self.output[distance <= self.radius] = 1 #mask every other point on canvas not inside radius
         return self.output.copy()
 
     def show(self):
