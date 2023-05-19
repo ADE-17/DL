@@ -1,7 +1,7 @@
 import unittest
 # from Layers import *
 from Layers.Base import BaseLayer
-from Layers import FullyConnected, Helpers, ReLU
+from Layers import FullyConnected, Helpers, ReLU, SoftMax, Loss
 from Optimization import Optimizers
 # from Optimization import *
 import numpy as np
