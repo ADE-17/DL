@@ -5,7 +5,6 @@ class CrossEntropyLoss:
         self.prediction_tensor = prediction_tensor
         self.label_tensor = label_tensor
         epsilon = np.finfo(prediction_tensor.dtype).eps
-        
         loss = -np.sum(label_tensor * np.log(self.prediction_tensor + epsilon)) 
         return loss
 

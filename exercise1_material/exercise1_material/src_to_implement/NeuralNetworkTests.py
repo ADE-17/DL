@@ -5,8 +5,8 @@ from Layers import FullyConnected, Helpers, ReLU, SoftMax, Loss
 from Optimization import Optimizers
 # from Optimization import *
 import numpy as np
-# import NeuralNetwork
-# import matplotlib.pyplot as plt
+import NeuralNetwork
+import matplotlib.pyplot as plt
 import tabulate
 import argparse
 
