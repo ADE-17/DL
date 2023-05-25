@@ -21,6 +21,7 @@ class NeuralNetwork:
         output = input_tensor
         for layer in self.layers:
             output = layer.forward(output)
+        output = self.loss_layer.forward(output, self.label_tensor)
         return output
     
     def backward(self, label_tensor):
@@ -45,7 +46,7 @@ class NeuralNetwork:
         """
         for iteration in range(iterations):
             output = self.forward()
-            self.loss.append(self.loss_layer.forward(output, self.label_tensor))
+            self.loss.append(output)
             self.backward(self.label_tensor)
             
     def test(self, input_tensor):

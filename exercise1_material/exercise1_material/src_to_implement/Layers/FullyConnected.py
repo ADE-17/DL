@@ -11,7 +11,7 @@ class FullyConnected(BaseLayer): #Inherits base layer
         super().__init__()
         self.trainable = True
         self.weights = np.random.uniform(0, 1, (input_size + 1, output_size)) #Random weights, +1 for bias column
-        self.biases = np.random.uniform(0, 1, (1, output_size)) #Random bias
+        # self.biases = np.random.uniform(0, 1, (1, output_size)) #Random bias
         self._gradient_weights = None
         self._gradient_biases = None
         self._optimizer = None
@@ -23,7 +23,7 @@ class FullyConnected(BaseLayer): #Inherits base layer
         self.input = input_tensor
 
         self.output = np.dot(np.concatenate([input_tensor, np.ones((input_tensor.shape[0], 1))], 
-                                                 axis=1), self.weights) + self.biases
+                                                 axis=1), self.weights) 
         return self.output
 
     def backward(self, error_tensor):
@@ -39,7 +39,7 @@ class FullyConnected(BaseLayer): #Inherits base layer
         
         if self._optimizer is not None: #Check if optimizer is set for particular layer
             self.weights = self._optimizer.calculate_update(self.weights, self._gradient_weights)
-            self.biases = self._optimizer.calculate_update(self.biases, self._gradient_biases)
+            # self.biases = self._optimizer.calculate_update(self.biases, self._gradient_biases)
 
         return self.gradient_input
 
