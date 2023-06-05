@@ -1,6 +1,6 @@
 import unittest
 from Layers import Initializers
-# from Optimization import *
+from Optimization import Optimizers
 import numpy as np
 from scipy import stats
 from scipy.ndimage.filters import gaussian_filter
