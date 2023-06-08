@@ -29,9 +29,9 @@ class Xavier:
     Returns: weights initialized using a normal distribution 
              with mean 0 and the calculated standard deviation.
     """ 
-    def initialize(self, shape, fan_in, fan_out):
+    def initialize(self, weights_shape, fan_in, fan_out):
         stddev = np.sqrt(2 / (fan_in + fan_out))
-        return np.random.normal(loc=0, scale=stddev, size=shape)
+        return np.random.normal(loc=0, scale=stddev, size=weights_shape)
     
 class He:
     """
