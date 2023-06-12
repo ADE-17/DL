@@ -16,14 +16,30 @@ class Sgd():
 
 class SgdWithMomentum:
     """
-    yet to add
+    Stochastic Gradient Descent with Momentum optimizer.
     """
     def __init__(self, learning_rate, momentum_rate):
+        """
+        Constructer
+        
+        Args:
+            learning_rate (float): step size at each iteration
+            momentum_rate (float): controls the contribution of the previous velocity to the current update
+        """
         self.learning_rate = learning_rate
         self.momentum_rate = momentum_rate
         self.velocity = None
 
     def calculate_update(self, weight_tensor, gradient_tensor):
+        """
+        Calculates and returns the updated weights using the momentum-based SGD update rule.
+        Args:
+            weight_tensor (array/tensor): current weights of the neural network.
+            gradient_tensor (array/tensor): gradients of the loss function with respect to the weights.
+
+        Returns:
+            array/tensor: The updated weights after applying the momentum-based SGD update rule
+        """
         if self.velocity is None:
             self.velocity = np.zeros_like(weight_tensor)
 
@@ -34,9 +50,16 @@ class SgdWithMomentum:
 
 class Adam:
     """
-    Yet to add
+    Adam optimizer for stochastic optimization.
     """
     def __init__(self, learning_rate, mu, rho):
+        """
+        Constructer
+        Args:
+            learning_rate (float): step size at each iteration
+            mu (float): The decay rate for the first moment estimation.
+            rho (_type_): he decay rate for the second moment estimation
+        """
         self.learning_rate = learning_rate
         self.mu = mu
         self.rho = rho
@@ -45,6 +68,16 @@ class Adam:
         self.moment_2 = None
 
     def calculate_update(self, weight_tensor, gradient_tensor):
+        """
+        Calculates and returns the updated weights using the Adam optimizer update rule.
+        
+        Args:
+            weight_tensor (array/tensor): The current weights of the neural network.
+            gradient_tensor (array/tensor): The gradients of the loss function with respect to the weights.
+
+        Returns:
+            array/tensor: The updated weights after applying the Adam optimizer update rule.
+        """
         self.time += 1
 
         if self.moment_1 is None:

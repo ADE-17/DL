@@ -42,8 +42,10 @@ class NeuralNetwork:
         Initializes trainable layers with stored initializers.
         """
         if layer.trainable:
-            layer.weights = self.weight_initializer(layer.weights.shape)
-            layer.biases = self.bias_initializer(layer.biases.shape)
+            if self.weight_initializer is not None:
+                layer.weights = self.weight_initializer(layer.weights.shape)
+            if self.bias_initializer is not None:
+                layer.biases = self.bias_initializer(layer.biases.shape)
             layer.optimizer = copy.deepcopy(self.optimizer)
         self.layers.append(layer)
 

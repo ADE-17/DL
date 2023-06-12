@@ -1,5 +1,6 @@
 import unittest
-from Layers import Initializers, Flatten, Conv, Pooling, Helpers, FullyConnected
+from Layers import Initializers, Flatten, Conv, Pooling, Helpers, FullyConnected, Loss, ReLU, SoftMax
+import NeuralNetwork
 from Optimization import Optimizers
 import numpy as np
 from scipy import stats
