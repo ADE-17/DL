@@ -25,7 +25,7 @@ class Conv(BaseLayer):
         self.gradient_bias = None
         self._optimizer = None
         self.lastShape = None
-
+        
     def forward(self, input_tensor):
         self.input_tensor = input_tensor
         if input_tensor.ndim == 3:
@@ -65,6 +65,61 @@ class Conv(BaseLayer):
         if not self.conv2d:
             output_tensor = output_tensor.squeeze(axis = 3) # just to solve error in 1d case
         return output_tensor
+
+    # def forward(self, input_tensor):
+        
+    #     self.input_tensor = input_tensor
+        
+    #     #initialize zeros, based on input tensor, number of kernels, and the stride shape.       
+    #     if len(self.convolution_shape) == 3: #If the convolution shape is 3D 
+    #         result = np.zeros((input_tensor.shape[0], 
+    #                            self.num_kernels, 
+    #                            int(np.ceil(input_tensor.shape[2]/self.stride_shape[0])),
+    #                            int(np.ceil(input_tensor.shape[3]/self.stride_shape[1]))))
+    #         #result.shape = (batch_size, num_kernels, output_height, output_width)      
+    #     elif len(self.convolution_shape) == 2: #If the convolution shape is 2D
+    #         result = np.zeros((input_tensor.shape[0], 
+    #                            self.num_kernels, 
+    #                            int(np.ceil(input_tensor.shape[2]/self.stride_shape[0]))))
+    #         #result.shape = (batch_size, num_kernels, output_height)
+            
+    #     result = [] #stores results of convolution layer
+        
+    #     for batch in range(input_tensor.shape[0]): # Iterate over input tensor
+    #         result_batch = [] #stores results of convolution layer of that batch
+            
+    #         for output_channel in range(self.weights.shape[0]): # Iterate over each kernel's output channel
+                
+    #             conv_sum = 0 # track sum of convolutions
+                
+    #             # Iterate over each kernel's input channel
+    #             for input_channel in range(self.weights.shape[1]): #Iterate over each input channel
+    #                 #conv_out = stores result for each input channel
+    #                 conv_out = signal.correlate(input_tensor[batch, input_channel],
+    #                                             self.weights[output_channel, input_channel], 
+    #                                             mode='same', method='direct') # Perform convolution
+                    
+    #                 conv_sum += conv_out 
+
+    #             # Check convolution shape after processing all input channels
+                
+    #             # If 3D, select every stride_shape[0]-th element along the height 
+    #             # and every stride_shape[1]-th element along the width of the conv_sum
+    #             if len(self.convolution_shape) == 3:
+    #                 conv_sum = conv_sum[::self.stride_shape[0], ::self.stride_shape[1]]
+    #             # If 2D, subsample along the height dimension
+    #             elif len(self.convolution_shape) == 2:
+    #                 conv_sum = conv_sum[::self.stride_shape[0]]
+   
+    #             result_batch.append(conv_sum + self.bias[output_channel]) # Add the bias value corresponding to the current output channel
+
+    #         result.append(result_batch) # Append result_batch to the final result
+
+    #     output_tensor = np.array(result) # Convert to numpy array
+        
+    #     self.output_shape  = output_tensor.shape # used in backward
+        
+    #     return output_tensor
     
     def backward(self, error_tensor):
         
