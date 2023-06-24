@@ -1,7 +1,7 @@
 import unittest
 try:
     LSTM_TEST = True
-    from Layers import FullyConnected, Helpers, Dropout
+    from Layers import FullyConnected, Helpers, Dropout, BatchNormalization, Flatten
 except BaseException as e:
     if str(e)[-6:] == "'LSTM'":
         LSTM_TEST = False
@@ -122,7 +122,6 @@ class TestFullyConnected(unittest.TestCase):
             self.assertLessEqual(np.sum(layer.weights) - 17, 1e-5)
         else:
             self.assertLessEqual(np.sum(layer.weights) - 35, 1e-5)
-
 
 
 class TestReLU(unittest.TestCase):
