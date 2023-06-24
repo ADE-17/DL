@@ -1,7 +1,7 @@
 import unittest
 try:
     LSTM_TEST = True
-    from Layers import FullyConnected, Helpers
+    from Layers import FullyConnected, Helpers, Dropout
 except BaseException as e:
     if str(e)[-6:] == "'LSTM'":
         LSTM_TEST = False
