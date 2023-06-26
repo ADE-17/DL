@@ -49,10 +49,10 @@ class BatchNormalization:
         if self.testing_phase: #Enters testing phase
             self.mean = self.moving_mean
             self.variance = self.moving_variance
-        else:
+        else: # Enters training phase
             self.mean = np.mean(input_tensor, axis= 0)
             self.variance = np.var(input_tensor, axis=0)
-            if self.moving_mean is None:
+            if self.moving_mean is None: 
                 self.moving_mean = copy.deepcopy(self.mean)
                 self.moving_variance = copy.deepcopy(self.variance)
             else:
@@ -113,8 +113,8 @@ class BatchNormalization:
         gradient = Helpers.compute_bn_gradients(error_tensor, self.input_tensor, self.gamma, self.mean, self.variance)
         
         if self._optimizer is not None:
-            self._optimizer.weight.calculate_update(self.gamma, delta_wrt_gamma)
-            self._optimizer.bias.calculate_update(self.beta, delta_wrt_beta)
+            self.weights = self._optimizer.weight.calculate_update(self.gamma, delta_wrt_gamma)
+            self.bias = self._optimizer.bias.calculate_update(self.beta, delta_wrt_beta)
 
         if need_conv: # check if reformatting output grad is required
             gradient = self.reformat(gradient)

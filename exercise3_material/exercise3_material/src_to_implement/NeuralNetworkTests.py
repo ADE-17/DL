@@ -1341,7 +1341,6 @@ class TestBatchNorm(unittest.TestCase):
             self.assertLess(np.sum(np.power(output_tensor, 2)), np.sum(np.power(new_output_tensor, 2)))
 
 
-
 class TestRNN(unittest.TestCase):
     def setUp(self):
         self.batch_size = 9
