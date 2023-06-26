@@ -110,10 +110,10 @@ class BatchNormalization:
         delta_wrt_beta = np.sum(error_tensor, axis=0) # bias
         
         # gradient with respect to the input
-        gradient = Helpers.compute_bn_gradients(error_tensor, self.input_tensor, self.gamma, self.mean, self.variance)
+        gradient = Helpers.compute_bn_gradients(error_tensor, self.input_tensor, self.weights, self.mean, self.variance)
         
         if self._optimizer is not None:
-            self.weights = self._optimizer.weight.calculate_update(self.gamma, delta_wrt_gamma)
+            self.weights = self._optimizer.weight.calculate_update(self.weights, delta_wrt_gamma)
             self.bias = self._optimizer.bias.calculate_update(self.beta, delta_wrt_beta)
 
         if need_conv: # check if reformatting output grad is required
@@ -124,6 +124,7 @@ class BatchNormalization:
         
         return gradient
         
+    #used gpt to set these
     @property
     def weights(self):
         return self.gamma
