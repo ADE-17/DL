@@ -26,7 +26,7 @@ class Dropout:
         Returns:
             array/tensor: output tensor after dropout 
         """
-        if self.testing_phase:
+        if self.testing_phase: # enters testing phase, no change - mask it with ones
             self.temp_mask = np.ones(input_tensor.shape)
         else:
             self.temp_mask = (np.random.rand(*input_tensor.shape) < self.probability).astype(float)

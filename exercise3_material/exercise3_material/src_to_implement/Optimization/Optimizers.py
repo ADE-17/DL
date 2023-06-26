@@ -16,14 +16,13 @@ class Sgd(Optimizer):
     y_n+1 = y_n - mu * d/dx.f(n)
      """
     def __init__(self, learning_rate):
+        super().__init__()
         #Initialize constructor variables
         self.learning_rate = learning_rate 
-    #     self.regularizer = None
-        
+        # self.regularizer = None
     # def add_regularizer(self, regularizer):
     #     #Store regularizer
     #     self.regularizer = regularizer
-        
     def calculate_update(self, weight_tensor, gradient_tensor):
         updated_tensor = weight_tensor - self.learning_rate * gradient_tensor #Gradient Descent
         
@@ -47,6 +46,7 @@ class SgdWithMomentum(Optimizer):
             learning_rate (float): step size at each iteration
             momentum_rate (float): controls the contribution of the previous velocity to the current update
         """
+        super().__init__()
         self.learning_rate = learning_rate
         self.momentum_rate = momentum_rate
         self.velocity = None
@@ -91,6 +91,7 @@ class Adam(Optimizer):
             mu (float): The decay rate for the first moment estimation.
             rho (_type_): he decay rate for the second moment estimation
         """
+        super().__init__()
         self.learning_rate = learning_rate
         self.mu = mu
         self.rho = rho
