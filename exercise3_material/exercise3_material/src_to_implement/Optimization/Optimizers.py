@@ -16,7 +16,7 @@ class Sgd(Optimizer):
     y_n+1 = y_n - mu * d/dx.f(n)
      """
     def __init__(self, learning_rate):
-        super().__init__()
+        super().__init__() # use instead of initializing trainable; for previous codes as well
         #Initialize constructor variables
         self.learning_rate = learning_rate 
         # self.regularizer = None
