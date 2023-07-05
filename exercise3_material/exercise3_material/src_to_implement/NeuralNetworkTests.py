@@ -1,7 +1,9 @@
 import unittest
 try:
     LSTM_TEST = True
-    from Layers import FullyConnected, Helpers, Dropout, BatchNormalization, Flatten, RNN, Sigmoid, TanH                                                                                                       
+    from Layers import (FullyConnected, Helpers, Dropout,
+                        BatchNormalization, Flatten, Loss, RNN, Sigmoid, TanH, Initializers,
+                        SoftMax, ReLU)                                                                                                      
 except BaseException as e:
     if str(e)[-6:] == "'LSTM'":
         LSTM_TEST = False
