@@ -1,0 +1,20 @@
+On the Iris dataset, we achieve an accuracy of: 96.0%
+On the Iris dataset, we achieve an accuracy of: 98.0%
+On the Iris dataset using Dropout, we achieve an accuracy of: 46.0%
+On the Iris dataset, we achieve an accuracy of: 96.0%
+On the Iris dataset, we achieve an accuracy of: 96.0%
+On the Iris dataset, we achieve an accuracy of: 98.0%
+On the Iris dataset using Dropout, we achieve an accuracy of: 50.0%
+On the Iris dataset, we achieve an accuracy of: 94.0%
+On the Iris dataset, we achieve an accuracy of: 96.0%
+On the Iris dataset, we achieve an accuracy of: 98.0%
+On the Iris dataset using Dropout, we achieve an accuracy of: 57.99999999999999%
+On the Iris dataset, we achieve an accuracy of: 94.0%
+On the UCI ML hand-written digits dataset using ADAM we achieve an accuracy of: 96.32721202003339%
+On the UCI ML hand-written digits dataset using L1_regularizer we achieve an accuracy of: 96.661101836394%
+On the UCI ML hand-written digits dataset using L2_regularizer we achieve an accuracy of: 96.32721202003339%
+On the UCI ML hand-written digits dataset using Dropout we achieve an accuracy of: 65.4424040066778%
+On the Iris dataset, we achieve an accuracy of: 96.0%
+On the Iris dataset, we achieve an accuracy of: 98.0%
+On the Iris dataset using Dropout, we achieve an accuracy of: 42.0%
+On the Iris dataset, we achieve an accuracy of: 94.0%
