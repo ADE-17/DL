@@ -1,0 +1,101 @@
+### Starting TaskPrologue of job 616743 on tg074 at Wed 12 Jul 2023 12:50:55 AM CEST
+Running on cores 0-3,16-19 with governor ondemand
+Wed Jul 12 00:50:55 2023       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.54.03              Driver Version: 535.54.03    CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Tesla V100-PCIE-32GB           On  | 00000000:18:00.0 Off |                    0 |
+| N/A   32C    P0              26W / 250W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+/home/hpc/iwso/iwso092h/miniconda/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/hpc/iwso/iwso092h/miniconda/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG19_Weights.IMAGENET1K_V1`. You can also use `weights=VGG19_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Epoch [1/50], Train Loss: 0.5917965257167817, Val Loss: 0.4305769383907318
+Epoch [2/50], Train Loss: 0.42119969114661215, Val Loss: 0.4391118907928467
+Epoch [3/50], Train Loss: 0.3463993289321661, Val Loss: 0.4014205175638199
+Epoch [4/50], Train Loss: 0.24766337975859642, Val Loss: 0.390795664191246
+Epoch [5/50], Train Loss: 0.20341973591595888, Val Loss: 0.3938033628463745
+Epoch [6/50], Train Loss: 0.1782709376513958, Val Loss: 0.40774922668933866
+Epoch [7/50], Train Loss: 0.16699329709634184, Val Loss: 0.4032179155945778
+Epoch [8/50], Train Loss: 0.1645249860920012, Val Loss: 0.4263065093755722
+Epoch [9/50], Train Loss: 0.1698323192819953, Val Loss: 0.42402680903673173
+Epoch [10/50], Train Loss: 0.1580712305754423, Val Loss: 0.4127501165866852
+Epoch [11/50], Train Loss: 0.1837513611651957, Val Loss: 0.4275038120150566
+Epoch [12/50], Train Loss: 0.17587964544072748, Val Loss: 0.40045827746391294
+Epoch [13/50], Train Loss: 0.16018176946789026, Val Loss: 0.43383576661348344
+Epoch [14/50], Train Loss: 0.17143029764294623, Val Loss: 0.4341842910647392
+Epoch [15/50], Train Loss: 0.15920973509550096, Val Loss: 0.40996042877435684
+Epoch [16/50], Train Loss: 0.1658876084536314, Val Loss: 0.40536754846572876
+Epoch [17/50], Train Loss: 0.16346503069624305, Val Loss: 0.4326328384876251
+Epoch [18/50], Train Loss: 0.1464594353735447, Val Loss: 0.4353062951564789
+Epoch [19/50], Train Loss: 0.1632090407796204, Val Loss: 0.4229967576265335
+Epoch [20/50], Train Loss: 0.1618332527205348, Val Loss: 0.4195853930711746
+Epoch [21/50], Train Loss: 0.16440110567957164, Val Loss: 0.43834963798522947
+Epoch [22/50], Train Loss: 0.14562960993498564, Val Loss: 0.409880074262619
+Epoch [23/50], Train Loss: 0.16091051634401082, Val Loss: 0.4081264388561249
+Epoch [24/50], Train Loss: 0.1634409187361598, Val Loss: 0.40164004504680634
+Epoch [25/50], Train Loss: 0.16956576209515334, Val Loss: 0.39990672171115876
+Epoch [26/50], Train Loss: 0.16301349684596061, Val Loss: 0.4018271064758301
+Epoch [27/50], Train Loss: 0.15466418851166963, Val Loss: 0.40843297898769376
+Epoch [28/50], Train Loss: 0.17263740364462138, Val Loss: 0.42906556457281114
+Epoch [29/50], Train Loss: 0.16914638739079238, Val Loss: 0.4238982790708542
+Epoch [30/50], Train Loss: 0.16875066619366408, Val Loss: 0.4101415026187897
+Epoch [31/50], Train Loss: 0.18419213753193617, Val Loss: 0.408822563290596
+Epoch [32/50], Train Loss: 0.1755386863835156, Val Loss: 0.4243744260072708
+Epoch [33/50], Train Loss: 0.15818478275090456, Val Loss: 0.39720152497291566
+Epoch [34/50], Train Loss: 0.16254942528903485, Val Loss: 0.415306950211525
+Epoch [35/50], Train Loss: 0.16427734170109035, Val Loss: 0.4092855930328369
+Epoch [36/50], Train Loss: 0.16338067211210727, Val Loss: 0.42313186287879945
+Epoch [37/50], Train Loss: 0.15840885324403645, Val Loss: 0.40393957793712615
+Epoch [38/50], Train Loss: 0.16652605172246696, Val Loss: 0.40457400143146516
+Epoch [39/50], Train Loss: 0.16641568306833507, Val Loss: 0.4177626448869705
+Epoch [40/50], Train Loss: 0.16719764046370983, Val Loss: 0.4155470782518387
+Epoch [41/50], Train Loss: 0.14291173934936524, Val Loss: 0.4110623526573181
+Epoch [42/50], Train Loss: 0.16381907574832438, Val Loss: 0.4091175401210785
+Epoch [43/50], Train Loss: 0.15860813148319722, Val Loss: 0.4434571459889412
+Epoch [44/50], Train Loss: 0.1570564803853631, Val Loss: 0.40770286083221435
+Epoch [45/50], Train Loss: 0.16575593777000905, Val Loss: 0.4160072737932205
+Epoch [46/50], Train Loss: 0.17194375339895487, Val Loss: 0.4156792041659355
+Epoch [47/50], Train Loss: 0.16056906266137957, Val Loss: 0.4051501101255417
+Epoch [48/50], Train Loss: 0.16563381019979714, Val Loss: 0.3971904265880585
+Epoch [49/50], Train Loss: 0.17107328049838544, Val Loss: 0.42015157103538514
+Epoch [50/50], Train Loss: 0.15906228497624397, Val Loss: 0.4130620187520981
+=== JOB_STATISTICS ===
+=== current date     : Wed 12 Jul 2023 12:56:24 AM CEST
+= Job-ID             : 616743 on tinygpu
+= Job-Name           : vgg_19.sh
+= Job-Command        : /home/woody/iwso/iwso092h/dl/vgg_19.sh
+= Initial workdir    : /home/woody/iwso/iwso092h/dl
+= Queue/Partition    : v100
+= Slurm account      : iwso with QOS=normal
+= Requested resources: cpu=8,mem=23000M,node=1,billing=8,gres/gpu=1,gres/gpu:v100=1 for 1-00:00:00
+= Elapsed runtime    : 00:05:33
+= Total RAM usage    : 3.6 GiB of requested 22 GiB (16.4%)   
+= Node list          : tg074
+= Subm/Elig/Start/End: 2023-07-12T00:50:51 / 2023-07-12T00:50:51 / 2023-07-12T00:50:51 / 2023-07-12T00:56:24
+======================
+=== Quota infos ======
+    Path              Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc           52.9G    52.4G   104.9G  19556days     300K     500K   1,000K        N/A !!!
+    /home/vault          0.0K   524.3G  1048.6G        N/A       1      200K     400K        N/A    
+    /home/woody        265.9G   500.0G   750.0G        N/A   1,288K   5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+Tesla V100-PCIE-32GB, 00000000:18:00.0, 3460810, 66 %, 45 %, 1886 MiB, 264339 ms

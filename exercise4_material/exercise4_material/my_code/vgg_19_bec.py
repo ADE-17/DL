@@ -21,8 +21,9 @@ class SolarPanelDataset(Dataset):
 
     def __getitem__(self, idx):
         img_name = self.data.iloc[idx, 0]
-        image = Image.open(self.root_dir + img_name).convert('L')  # Convert to grayscale
+        image = Image.open(self.root_dir + img_name).convert('L')  
 
+        # Convert grayscale image to RGB
         image = image.convert('RGB')
 
         if self.transform:
@@ -33,9 +34,23 @@ class SolarPanelDataset(Dataset):
 
         return image, crack_label, inactive_label
     
+from torch.nn import BCEWithLogitsLoss
+
+class FocalLoss(nn.Module):
+    def __init__(self, gamma=2, alpha=0.5):
+        super(FocalLoss, self).__init__()
+        self.gamma = gamma
+        self.alpha = alpha
+
+    def forward(self, inputs, targets):
+        bce_loss = BCEWithLogitsLoss(reduction='none')(inputs, targets)
+        pt = torch.exp(-bce_loss)
+        focal_loss = (self.alpha * (1 - pt) ** self.gamma * bce_loss).mean()
+        return focal_loss
+    
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-num_epochs = 50
+num_epochs = 30
 batch_size = 16
 learning_rate = 0.001
 random_state = 42
@@ -47,7 +62,7 @@ root_dir = '/home/woody/iwso/iwso092h/dl/'
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
-    transforms.RandomRotation(20), 
+    transforms.RandomRotation(20),  
     transforms.RandomHorizontalFlip(),  
     transforms.ToTensor(),
     transforms.Normalize((0.5969,), (0.1143,))
@@ -66,7 +81,7 @@ num_samples = len(dataset)
 class_weights = 1.0 / (class_counts / num_samples)
 class_weights = torch.Tensor(class_weights).to(device)
 
-num_classes = 2 
+num_classes = 2  
 model = models.vgg19(pretrained=True)
 
 for param in model.parameters():
@@ -74,23 +89,24 @@ for param in model.parameters():
 
 in_features = model.classifier[0].in_features
 
-classifier = nn.Sequential(
+fc_layer = nn.Sequential(
     nn.Linear(in_features, 512),
     nn.ReLU(),
     nn.BatchNorm1d(512),
     nn.Dropout(0.5),
-    nn.Linear(512, num_classes)
+    nn.Linear(512, 1),
+    nn.Sigmoid()
 )
 
-model.classifier = classifier
+model.classifier = fc_layer
 
 model = model.to(device)
 
 gamma = 2  # Focal Loss hyperparameter
-criterion = nn.CrossEntropyLoss(weight=class_weights)
+criterion = FocalLoss(gamma, alpha=0.5)
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
-lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1) 
+lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)  
 
 train_losses = []
 val_losses = []
