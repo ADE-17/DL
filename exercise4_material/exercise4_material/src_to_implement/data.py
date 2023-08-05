@@ -11,25 +11,21 @@ train_std = [0.16043035, 0.16043035, 0.16043035]
 
 
 class ChallengeDataset(Dataset):
-    # TODO implement the Dataset class according to the description
+
     def __init__(self, data, mode):
         self.data = data
-        # self.train = (mode == 'train')
+
         self.mode = mode
         TF = tv.transforms
         self.val_transform = TF.Compose([  
                                     TF.ToPILImage(),
                                     TF.ToTensor(),
                                     TF.Normalize(train_mean, train_std),
-                                    # TF.RandomHorizontalFlip(p=0.3),
-                                    # TF.RandomVerticalFlip(p=0.3)
                                     ])
         self.train_transform = TF.Compose([  
                                     TF.ToPILImage(),
                                     TF.ToTensor(),
                                     TF.Normalize(train_mean, train_std)
-                                    # TF.RandomHorizontalFlip(p=0.3),
-                                    # TF.RandomVerticalFlip(p=0.3)
                                     ])
 
     def __len__(self):
